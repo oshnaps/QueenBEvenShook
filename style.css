@@ -1,0 +1,66 @@
+.main-cont {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.horizontal-cont {
+  width: 50%;
+  display: flex;
+  justify-content: space-between;
+}
+
+#even {
+  height: 270px;
+  width: 190px;
+  background-image: url('https://i.imgur.com/AwoImrh.png');
+  background-position: center;
+}
+#nyar {
+  height: 270px;
+  width: 190px;
+  background-image: url('https://i.imgur.com/hHR5gLi.png');
+  background-position: center;
+}
+#misp {
+  height: 270px;
+  width: 190px;
+  background-image: url('https://i.imgur.com/46l14pY.png');
+  background-position: center;
+}
+
+.pie-chart {
+	background:
+		radial-gradient(
+			circle closest-side,
+			transparent 66%,
+			white 0
+		),
+		conic-gradient(
+			#4e79a7 0,
+			#4e79a7 0,
+			#f28e2c 0,
+			#f28e2c 100%
+	);
+	position: relative;
+	width: 200px;
+	min-height: 170px;
+	margin: 0;
+}
+.pie-chart figcaption {
+	position: absolute;
+	bottom: 1em;
+	right: 1em;
+	font-size: smaller;
+	text-align: right;
+}
+.pie-chart span:after {
+	display: inline-block;
+	content: "";
+	width: 0.8em;
+	height: 0.8em;
+	margin-left: 0.4em;
+	height: 0.8em;
+	border-radius: 0.2em;
+	background: currentColor;
+}
