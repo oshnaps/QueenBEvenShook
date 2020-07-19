@@ -1,3 +1,7 @@
+const options = ["even", "nyar", "misp"];
+
+///// Local DB stuff to aggregate results /////
+
 initResultsLocalDb = () => {
   localStorage.setItem('EvenShookWon', 0);
   localStorage.setItem('EvenShookLost', 0);
@@ -9,12 +13,14 @@ addResultToLocalDb = (result) => {
   localStorage.setItem(`EvenShook${result}`, ++dbCurrVal);
 };
 
+
+///// UI Stuff /////
+
 updateChart = () => {
   let dbWon = parseInt(localStorage.getItem('EvenShookWon'));
   let dbLost = parseInt(localStorage.getItem('EvenShookLost'));
   let dbTotal = dbWon + dbLost || 1;
   let winPercentage = dbWon / dbTotal * 100;
-  console.log(winPercentage);
   document.getElementById('chart').style.background="radial-gradient(circle closest-side, transparent 66%, white 0), conic-gradient(#4e79a7 0 "+ winPercentage +"%, #f28e2c 0 100%)";
 }
 
@@ -40,9 +46,12 @@ handleSystem = (systemChoise) => {
   document.getElementById("system").innerHTML = `Computer chose ${systemChoise}`;
 }
 
+
+///// Other logical utils /////
+
 compareEvenShook = (player1, player2) => {
-  //validate(player1);
-  //validate(player2);
+  //TODO validate(player1);
+  //TODO validate(player2);
 
   if (player1 === player2) {
     return 0;
@@ -64,7 +73,6 @@ compareEvenShook = (player1, player2) => {
 }
 
 randomForSystem = () => {
-  const options = ["even", "nyar", "misp"];
   return options[Math.floor(Math.random() * 3)];
 }
 
@@ -76,12 +84,13 @@ handleChoosingAction = (e) => {
 }
   
 addListeners = () => {
-  ["even", "nyar", "misp"].forEach((id) => {
+  options.forEach((id) => {
     document.getElementById(id).addEventListener("click", handleChoosingAction);
   });
 };
 
 
-// Init
+///// Init /////
+
 document.addEventListener("DOMContentLoaded", addListeners);
 initResultsLocalDb();
