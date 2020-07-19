@@ -18,21 +18,26 @@ updateChart = () => {
   document.getElementById('chart').style.background="radial-gradient(circle closest-side, transparent 66%, white 0), conic-gradient(#4e79a7 0 "+ winPercentage +"%, #f28e2c 0 100%)";
 }
 
-doResult = (result) => {
+handleResult = (result) => {
+  const resultHTML = document.getElementById("result"); 
   if (result === 0) {
     addResultToLocalDb("Even");
-    alert("No one wins, play again");
+    resultHTML.innerHTML = "No one wins, play again";
   }
   else if (result < 0) {
     addResultToLocalDb("Lost");
-    alert("You lose...");
+    resultHTML.innerHTML = "You lose... try again!";
     updateChart();
   }
   else {
     addResultToLocalDb("Won");
-    alert("You Win!");
+    resultHTML.innerHTML = "You Win! Do it again!";
     updateChart();
   }
+}
+
+handleSystem = (systemChoise) => {
+  document.getElementById("system").innerHTML = `Computer chose ${systemChoise}`;
 }
 
 compareEvenShook = (player1, player2) => {
@@ -63,25 +68,20 @@ randomForSystem = () => {
   return options[Math.floor(Math.random() * 3)];
 }
 
-showChoise = (id, entity) => {
-  // TODO
-  alert(entity + " chose " + id);
-}
-
 handleChoosingAction = (e) => {
   const { id } = e.target;
   const system = randomForSystem();
-  showChoise(id, "you");
-  showChoise(system, "system");
-  doResult(compareEvenShook(id, system));
+  handleSystem(system);
+  handleResult(compareEvenShook(id, system));
 }
   
 addListeners = () => {
-  console.log("running");
   ["even", "nyar", "misp"].forEach((id) => {
     document.getElementById(id).addEventListener("click", handleChoosingAction);
   });
 };
 
+
+// Init
 document.addEventListener("DOMContentLoaded", addListeners);
 initResultsLocalDb();
